@@ -1,326 +1,1396 @@
-/* Variables for Theme Switching */
-:root {
-    --primary-color: #A34A2A; /* Burnt Orange/Terracotta */
-    --secondary-color: #C7B09F; /* Light Taupe/Beige */
-    --accent-color: #6A050A; /* Deep Red/Burgundy for accents */
+/* --- Font Imports (Professional Touch) --- */
+/* Using Playfair Display for headings for an elegant, serif feel */
+/* Using Roboto for body text for readability and modern simplicity */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
 
-    /* Light Theme Colors */
-    --bg-primary: #F8F4E3; /* Off-White for main background */
-    --bg-secondary: #EFEAE0; /* Slightly darker off-white for sections */
-    --text-primary: #333333; /* Dark Grey for main text */
-    --text-secondary: #555555; /* Medium Grey for secondary text */
-    --text-muted: #777777; /* Lighter Grey for subtle text */
-    --card-bg: #FFFFFF; /* White for card backgrounds */
-    --border-color: #DDDDDD; /* Light grey for borders */
-    --shadow-light: rgba(0, 0, 0, 0.05);
-    --shadow-medium: rgba(0, 0, 0, 0.1);
-    --shadow-deep: rgba(0, 0, 0, 0.2);
-    --nav-bg: rgba(255, 255, 255, 0.95); /* Slightly transparent white for nav */
-    --footer-bg: #222222; /* Dark grey for footer */
-    --footer-text: #F8F4E3; /* Off-white for footer text */
-    --currency-icon-color: var(--primary-color); /* Color for currency icon */
-    --icon-light-display: block;
-    --icon-dark-display: none;
-}
-
-/* Dark Theme Colors */
-html[data-theme='dark'] {
-    --primary-color: #CD8A5A; /* Lighter Burnt Orange for dark mode */
-    --secondary-color: #8C7B70; /* Darker Taupe */
-    --accent-color: #E24F53; /* Brighter Red for accents */
-
-    --bg-primary: #1C1C1C; /* Dark Grey for main background */
-    --bg-secondary: #2C2C2C; /* Slightly lighter dark grey for sections */
-    --text-primary: #F8F4E3; /* Off-White for main text */
-    --text-secondary: #D4D4D4; /* Lighter grey for secondary text */
-    --text-muted: #B8B8B8; /* Even lighter grey for subtle text */
-    --card-bg: #333333; /* Darker grey for card backgrounds */
-    --border-color: #444444; /* Darker grey for borders */
-    --shadow-light: rgba(255, 255, 255, 0.05);
-    --shadow-medium: rgba(0, 0, 0, 0.3); /* Darker shadows for contrast */
-    --shadow-deep: rgba(0, 0, 0, 0.5);
-    --nav-bg: rgba(44, 44, 44, 0.95); /* Slightly transparent dark grey for nav */
-    --footer-bg: #0C0C0C; /* Even darker for footer */
-    --footer-text: #D4D4D4; /* Lighter text for footer */
-    --currency-icon-color: var(--primary-color);
-    --icon-light-display: none;
-    --icon-dark-display: block;
-}
-
-/* Base Styles */
+/* --- Basic Reset & Global Styles --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Arial', sans-serif; /* يمكن تغيير الخط هنا لخط عربي أجمل */
-    line-height: 1.6;
-    color: var(--text-primary);
-    background-color: var(--bg-primary);
-    transition: background-color 0.4s ease, color 0.4s ease;
+/* --- CSS Variables for Light/Dark Mode --- */
+:root {
+    /* Light Theme Colors */
+    --bg-primary: #fcfcfc; /* Main background color */
+    --bg-secondary: #f8f8f8; /* Slightly darker background for alternate sections */
+    --text-primary: #1a1a1a; /* Dark text for headings and strong elements */
+    --text-secondary: #333; /* Slightly lighter dark for general text */
+    --text-paragraph: #555; /* Medium gray for paragraphs */
+    --text-muted: #777; /* Lighter gray for subtle text (e.g., footers) */
+    --border-color: #e0e0e0; /* General border color */
+    --shadow-light: rgba(0, 0, 0, 0.04); /* Light shadow */
+    --shadow-medium: rgba(0, 0, 0, 0.06); /* Medium shadow */
+    --shadow-deep: rgba(0, 0, 0, 0.1); /* Deeper shadow */
+    --footer-bg: #1a1a1a; /* Footer background */
+    --footer-text: #f0f0f0; /* Footer text color */
+    --footer-muted: #aaa; /* Muted text in footer */
+    --nav-bg: #fff; /* Navigation bar background */
+    --nav-shadow: rgba(0, 0, 0, 0.04); /* Navigation bar shadow */
+    --hero-overlay: rgba(0, 0, 0, 0.4); /* Dark overlay for hero image */
+    --card-bg: #fff; /* Background for cards/sections */
+    --currency-icon-color: #4CAF50; /* A nice green for currency icon */
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+/* Dark Theme Colors */
+html[data-theme='dark'] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #222222;
+    --text-primary: #f0f0f0;
+    --text-secondary: #e0e0e0;
+    --text-paragraph: #c0c0c0;
+    --text-muted: #999;
+    --border-color: #3a3a3a;
+    --shadow-light: rgba(255, 255, 255, 0.05);
+    --shadow-medium: rgba(255, 255, 255, 0.08);
+    --shadow-deep: rgba(255, 255, 255, 0.15);
+    --footer-bg: #0d0d0d;
+    --footer-text: #f0f0f0;
+    --footer-muted: #777;
+    --nav-bg: #1a1a1a;
+    --nav-shadow: rgba(255, 255, 255, 0.05);
+    --hero-overlay: rgba(0, 0, 0, 0.6); /* Slightly darker overlay for dark mode */
+    --card-bg: #2b2b2b;
+    --currency-icon-color: #8BC34A; /* A slightly different green for dark mode */
+}
+/* --- 1. General & Base Styles --- */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f8f8f8; /* خلفية فاتحة جداً */
+  color: #333; /* لون نص داكن */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
-    text-decoration: none;
-    color: var(--primary-color);
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: inherit;
 }
 
-a:hover {
-    color: var(--accent-color);
+/* --- 2. Navbar Styles --- */
+.navbar {
+  background-color: #fff; /* أبيض نقي */
+  padding: 15px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* ظل واضح لكن ليس ثقيل */
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-ul {
-    list-style: none;
+.navbar .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-h1, h2, h3, h4 {
-    color: var(--text-primary);
-    margin-bottom: 20px;
-}
-
-p {
-    color: var(--text-secondary);
-    margin-bottom: 15px;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block; /* Removes extra space below images */
-}
-
-/* Utility Classes */
-.text-center {
-    text-align: center;
-}
-
-.section-padding {
-    padding: 80px 0;
-}
-
-.section-bg {
-    background-color: var(--bg-secondary);
-    transition: background-color 0.4s ease;
-}
-
-.mt-5 {
-    margin-top: 40px; /* Adjust as needed */
-}
-
-/* Buttons */
-.btn-primary {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 10px;
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-color);
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    display: inline-block;
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    padding: 12px 25px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 10px;
-}
-
-.btn-secondary:hover {
-    background-color: var(--primary-color);
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-/* Navigation Bar */
-nav {
-    background-color: var(--nav-bg);
-    padding: 20px 0;
-    position: sticky; /* جعل شريط التنقل ملتصقاً بالواجهة */
-    top: 0; /* يلتصق بالأعلى */
-    z-index: 1000; /* لضمان ظهوره فوق المحتوى الآخر */
-    box-shadow: 0 2px 10px var(--shadow-light);
-    backdrop-filter: blur(5px); /* تأثير ضبابي للخلفية */
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-.nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; /* للسماح للعناصر بالنزول لسطر جديد على الشاشات الصغيرة */
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-brand {
-    font-size: 32px;
-    font-weight: bold;
-    color: var(--primary-color);
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #222; /* لون داكن للعلامة التجارية */
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.nav-links {
-    display: flex;
-    gap: 25px;
-    flex-grow: 1; /* للسماح للروابط بأخذ مساحة أكبر */
-    justify-content: center; /* توسيط الروابط */
+/* --- 3. Nav Toggler (Hamburger Icon) --- */
+.nav-toggler {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  color: #444; /* لون أيقونة الهامبرغر */
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: color 0.3s ease;
 }
 
-.nav-links a {
-    color: var(--text-primary);
-    font-weight: bold;
-    padding: 5px 0;
-    position: relative;
+/* --- 4. Full-Screen Overlay Menu (Mobile/Tablet) --- */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95); /* خلفية سوداء شبه شفافة */
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.5s ease-out, opacity 0.4s ease-out, visibility 0.4s ease-out;
 }
 
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
+.nav-overlay.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 100%;
+.nav-overlay-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2.8em;
+  color: #fff; /* لون أبيض لأيقونة الإغلاق */
+  cursor: pointer;
+  z-index: 1002;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.nav-links a.active {
-    color: var(--primary-color);
+.nav-overlay-close:hover {
+  color: #fff; /* لون تمييز عند التمرير */
+  transform: rotate(90deg);
 }
 
-.nav-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.nav-overlay .nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: large;
 }
 
-.lang-switcher .lang-btn {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-weight: bold;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: color 0.3s ease, background-color 0.3s ease;
+.nav-overlay .nav-links a {
+  font-size: 2.5em;
+  color: #eee; /* لون فاتح للروابط على الخلفية الداكنة */
+  text-decoration: none;
+  padding: 10px 0;
+  font-weight: 700;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
 }
 
-.lang-switcher .lang-btn:hover {
-    color: var(--primary-color);
+.nav-overlay .nav-links a:hover {
+  color: #fff; /* لون تمييز عند التمرير */
+  transform: scale(1.05);
+  border-radius: 5px;
 }
 
-.lang-switcher .lang-btn.active-lang {
-    background-color: var(--primary-color);
-    color: #fff;
+.nav-overlay .nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #fff; /* لون تمييز للخط السفلي */
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease-out;
+}
+
+.nav-overlay .nav-links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+[dir="ltr"] .nav-overlay .nav-links a::after {
+  left: 0;
+  transform-origin: left;
+}
+[dir="ltr"] .nav-overlay .nav-links a:hover::after {
+  transform-origin: right;
+}
+
+/* --- 5. Nav Controls (Language Switcher & Theme Toggle) --- */
+.nav-overlay .nav-controls {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.lang-switcher button {
+  background: #333; /* خلفية داكنة للأزرار */
+  border: 2px solid #555;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #ccc; /* لون نص فاتح */
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.lang-switcher button:hover {
+  color: #fff;
+  background-color: #555; /* لون أغمق عند التمرير */
+  border-color: #777;
+}
+
+.lang-switcher .active-lang {
+  background-color: #ffcc00; /* لون تمييز للزر النشط */
+  color: #333; /* نص داكن على لون التمييز */
+  border-color: #ffcc00;
 }
 
 .theme-toggle {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--text-primary); /* لون الأيقونة بناءً على الثيم */
-    transition: color 0.3s ease;
-    padding: 5px;
-    border-radius: 5px;
+  background: #333;
+  border: 2px solid #555;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.6em;
+  color: #eee;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle:hover {
+  background-color: #555;
+  color: #fff;
+  transform: translateY(-3px);
+  border-color: #777;
+}
+
+.theme-toggle .icon-light,
+.theme-toggle .icon-dark {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .theme-toggle .icon-light {
-    display: var(--icon-light-display);
+    opacity: 1;
+    transform: translateY(0);
+}
+.theme-toggle .icon-dark {
+    opacity: 0;
+    transform: translateY(100%);
 }
 
-.theme-toggle .icon-dark {
-    display: var(--icon-dark-display);
+/* --- 6. Dark Theme Overrides (Applied when html[data-theme='dark'] is set by JS) --- */
+html[data-theme='dark'] {
+  --text-color: #f8f8f8;
+  --bg-color: #121212; /* خلفية داكنة جداً */
+  --navbar-bg: #1e1e1e;
+  --navbar-text: #f8f8f8;
+  --section-bg: #1e1e1e;
+  --card-bg: #282828;
+  --border-color: #333;
+  --form-bg: #282828;
+  --form-border: #444;
 }
+
+html[data-theme='dark'] body {
+  background-color: #121212;
+  color: #f8f8f8;
+}
+
+html[data-theme='dark'] .navbar {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+html[data-theme='dark'] .navbar .nav-brand {
+  color: #f8f8f8;
+}
+html[data-theme='dark'] .navbar .nav-toggler {
+  color: #f8f8f8;
+}
+
+/* Dark theme for overlay */
+html[data-theme='dark'] .nav-overlay {
+  background-color: rgba(0, 0, 0, 0.98); /* سوداء أكثر كثافة */
+}
+html[data-theme='dark'] .nav-overlay-close {
+  color: #ffcc00;
+}
+html[data-theme='dark'] .nav-overlay .nav-links a {
+  color: #fff; /* روابط بيضاء نقية */
+}
+html[data-theme='dark'] .nav-overlay .nav-links a:hover {
+  color: #ffcc00;
+}
+html[data-theme='dark'] .nav-overlay .nav-links a::after {
+  background-color: #ffcc00;
+}
+
+/* Dark theme for nav controls in overlay */
+html[data-theme='dark'] .nav-overlay .lang-switcher button {
+  background: #282828;
+  border-color: #444;
+  color: #ccc;
+}
+html[data-theme='dark'] .nav-overlay .lang-switcher button:hover {
+  background-color: #444;
+  color: #fff;
+  border-color: #666;
+}
+html[data-theme='dark'] .nav-overlay .lang-switcher .active-lang {
+  background-color: #ffcc00;
+  color: #1a1a1a;
+  border-color: #ffcc00;
+}
+
+html[data-theme='dark'] .nav-overlay .theme-toggle {
+  background: #282828;
+  border-color: #444;
+  color: #ccc;
+}
+html[data-theme='dark'] .nav-overlay .theme-toggle:hover {
+  background-color: #444;
+  color: #fff;
+  border-color: #666;
+}
+
+/* Dark theme for theme toggle icons visibility */
+html[data-theme='dark'] .theme-toggle .icon-light {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+html[data-theme='dark'] .theme-toggle .icon-dark {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- General Section Styles (Update for monochromatic theme) --- */
+/* These styles should apply to sections like #about, #menu, #gallery, etc. */
+section {
+    padding: 60px 20px; /* تباعد افتراضي للأقسام */
+    background-color: #fff; /* خلفية فاتحة للأقسام في الوضع النهاري */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* ظل خفيف */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:nth-of-type(even) { /* لأقسام متناوبة، لجعل التصميم أكثر حيوية */
+    background-color: #f5f5f5; /* درجة رمادية فاتحة */
+}
+
+section h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #222;
+}
+
+section h3 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+section p {
+    color: #555;
+}
+
+/* Buttons (General Styles) */
+.btn-primary {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #333; /* لون أساسي داكن */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px;
+}
+.btn-primary:hover {
+  background-color: #555; /* أغمق عند التمرير */
+  transform: translateY(-2px);
+}
+.btn-secondary {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: transparent;
+    border: 2px solid #555; /* حدود رمادية داكنة */
+    color: #555;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
+    margin-right: 10px; /* للمسافة بين الأزرار */
+}
+.btn-secondary:hover {
+    background-color: #555;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Form Inputs (General Styles) */
+#contact input,
+#contact textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd; /* حدود فاتحة */
+  border-radius: 4px;
+  font-size: 1em;
+  color: #333;
+  background-color: #fff;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+#contact input::placeholder,
+#contact textarea::placeholder {
+  color: #aaa;
+}
+#contact input:focus,
+#contact textarea:focus {
+  border-color: #888; /* حدود أغمق عند التركيز */
+  outline: none;
+}
+
 
 /* Footer */
 footer {
-    background-color: var(--footer-bg);
+  background-color: #1a1a1a; /* خلفية داكنة جداً للفوتر */
+  color: #f8f8f8;
+  padding: 40px 20px;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+footer a {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5em;
+  transition: color 0.3s ease;
+}
+footer a:hover {
+    color: #ffcc00;
+}
+footer p {
+  color: #ccc;
+  font-size: 0.9em;
+  margin-top: 10px;
+}
+footer .copyright {
+    color: #aaa;
+}
+
+
+/* --- Dark Theme Overrides for General Sections & Elements --- */
+html[data-theme='dark'] section {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+html[data-theme='dark'] section:nth-of-type(even) {
+    background-color: #282828; /* درجة رمادية أغمق للتبديل */
+}
+html[data-theme='dark'] section h2 {
+    color: #f8f8f8;
+}
+html[data-theme='dark'] section h3 {
+    color: #eee;
+}
+html[data-theme='dark'] section p {
+    color: #ccc;
+}
+
+html[data-theme='dark'] .btn-primary {
+  background-color: #555;
+  color: #fff;
+}
+html[data-theme='dark'] .btn-primary:hover {
+  background-color: #777;
+}
+html[data-theme='dark'] .btn-secondary {
+    border-color: #888;
+    color: #ccc;
+}
+html[data-theme='dark'] .btn-secondary:hover {
+    background-color: #888;
+    color: #fff;
+}
+
+html[data-theme='dark'] #contact input,
+html[data-theme='dark'] #contact textarea {
+  background-color: #282828;
+  border-color: #444;
+  color: #f8f8f8;
+}
+html[data-theme='dark'] #contact input::placeholder,
+html[data-theme='dark'] #contact textarea::placeholder {
+  color: #bbb;
+}
+html[data-theme='dark'] #contact input:focus,
+html[data-theme='dark'] #contact textarea:focus {
+  border-color: #666;
+}
+
+html[data-theme='dark'] footer {
+  background-color: #0d0d0d;
+  color: #f8f8f8;
+}
+html[data-theme='dark'] footer a {
+  color: #ddd;
+}
+html[data-theme='dark'] footer a:hover {
+    color: #ffcc00;
+}
+html[data-theme='dark'] footer .copyright {
+    color: #bbb;
+}
+
+
+/* --- 7. Responsive / Desktop Styles (Media Query) --- */
+@media (min-width: 993px) {
+  .nav-toggler,
+  .nav-overlay-close {
+    display: none;
+  }
+
+  .nav-overlay {
+    position: static;
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-grow: 1;
+    gap: 30px;
+  }
+
+  .nav-overlay .nav-links {
+    flex-direction: row;
+    gap: 15px;
+    margin-bottom: 0;
+    text-align: initial;
+  }
+
+  .nav-overlay .nav-links a {
+    font-size: 1em;
+    padding: 10px 15px;
+    color: #555; /* لون الروابط في الوضع النهاري لسطح المكتب */
+    font-weight: 500;
+  }
+
+  .nav-overlay .nav-links a:hover {
+    color: #222; /* أغمق عند التمرير */
+    transform: none;
+  }
+
+  .nav-overlay .nav-links a::after {
+    display: none;
+  }
+
+  .nav-overlay .nav-controls {
+    flex-direction: row;
+    margin-top: 0;
+    gap: 15px;
+  }
+
+  .lang-switcher button {
+    background: none;
+    border: 1px solid #ccc;
+    font-size: 0.95em;
+    padding: 5px 8px;
+    box-shadow: none;
+    color: #666;
+  }
+  .lang-switcher button:hover {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  .lang-switcher .active-lang {
+    background-color: #e0e0e0;
+    color: #333;
+    border-color: #e0e0e0;
+  }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid #ccc;
+    width: 35px;
+    height: 35px;
+    font-size: 1.1em;
+    box-shadow: none;
+    color: #666;
+  }
+  .theme-toggle:hover {
+    background-color: #eee;
+    transform: none;
+    color: #333;
+  }
+
+  /* تطبيق ألوان الوضع الداكن على عناصر سطح المكتب */
+  html[data-theme='dark'] .nav-overlay .nav-links a {
+    color: #ccc;
+  }
+  html[data-theme='dark'] .nav-overlay .nav-links a:hover {
+    color: #fff;
+  }
+  html[data-theme='dark'] .lang-switcher button {
+    background: none;
+    border-color: #444;
+    color: #999;
+  }
+  html[data-theme='dark'] .lang-switcher button:hover {
+    background-color: #282828;
+    color: #ccc;
+  }
+  html[data-theme='dark'] .lang-switcher .active-lang {
+    background-color: #3a3a3a;
+    color: #fff;
+    border-color: #3a3a3a;
+  }
+  html[data-theme='dark'] .theme-toggle {
+    background: none;
+    border-color: #444;
+    color: #999;
+  }
+  html[data-theme='dark'] .theme-toggle:hover {
+    background-color: #282828;
+    color: #ccc;
+  }
+}
+
+/* --- 8. Responsive / Mobile Styles (Media Query) --- */
+@media (max-width: 992px) {
+  .nav-toggler {
+    display: block;
+  }
+}
+
+/* Hero Section (مثال - ألوان نصها تعتمد على خلفية الصورة) */
+.hero-bg h1, .hero-bg p {
+    color: #fff; /* النص أبيض على خلفية الصورة، لا يتغير مع الثيم */
+}
+
+/* --- Hero Section --- */
+.hero-bg {
+    background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff; /* White text on hero image */
+    min-height: 90vh; /* Minimum height for hero section */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero-bg::before { /* Subtle dark overlay */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--hero-overlay); /* Use variable for overlay color */
+    z-index: 1;
+    transition: background-color 0.4s ease;
+}
+
+.hero-bg > div { /* Content container within hero for readability */
+    z-index: 10; /* Bring content above overlay */
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.05); /* Slightly translucent background */
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.hero-bg h1 {
+    font-size: 72px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #fff; /* Always white on hero */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Subtle text shadow for readability */
+}
+
+.hero-bg p {
+    font-size: 24px;
+    margin-bottom: 50px;
+    opacity: 0.95;
+    color: #fff; /* Always white on hero */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.hero-bg .btn-primary {
+    background-color: #fff; /* White background for primary button on hero */
+    color: var(--text-secondary); /* Dark text color for primary button */
+    border-color: #fff;
+    margin: 0 15px;
+    padding: 16px 40px;
+    font-size: 19px;
+}
+
+.hero-bg .btn-primary:hover {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white on hover */
+    border-color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-bg .btn-secondary {
+    border-color: rgba(255, 255, 255, 0.7); /* Translucent white border */
+    color: #fff; /* White text */
+    margin: 0 15px;
+    padding: 16px 40px;
+    font-size: 19px;
+}
+
+.hero-bg .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Very subtle translucent background on hover */
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- General Section Styling --- */
+section {
+    padding: 100px 0; /* Vertical padding for sections */
+    background-color: var(--bg-primary); /* Use variables for background color */
+    transition: background-color 0.4s ease; /* Smooth transition for theme change */
+}
+
+section:nth-of-type(odd) { /* Alternate background for sections */
+    background-color: var(--bg-secondary); /* Use variables for alternate background */
+}
+
+section > div { /* Content container within each section */
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+/* Minimalist About Section - Option 1 - Centered */
+.about-minimal-1 {
+  padding: 80px 20px;
+  background-color: #f8f8f8;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  display: flex; /* Use flexbox to center the section content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically (if section height is defined) */
+  min-height: 100vh; /* Example: make the section take full viewport height for vertical centering */
+}
+
+.about-minimal-1 .container {
+  max-width: 900px;
+  margin: 0 auto; /* This already centers the block within its parent */
+  text-align: center; /* Ensures all inline content (text, button) is centered */
+  width: 100%; /* Ensure container takes full available width within flex item */
+}
+
+.about-minimal-1 h2 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  color: #555;
+  position: relative;
+  left: 400px;
+  display: inline-block; /* Essential for centering the ::after pseudo-element */
+}
+
+.about-minimal-1 h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background-color: #a0a0a0;
+}
+
+.about-minimal-1 .image-wrapper {
+  margin: 0 auto 40px auto; /* Centers the image wrapper itself */
+  overflow: hidden;
+  width: 500px;
+  height: 250px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.about-minimal-1 img {
+  width: 500px;
+  height: 250px;
+  height: auto;
+  display: block;
+}
+
+.about-minimal-1 .content-wrapper p {
+  font-size: 1.1em;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  color: #666;
+  text-align: center; /* Ensure text is centered within its wrapper */
+  position: relative;
+  right:220px;
+}
+
+.about-minimal-1 .btn-primary {
+  display: inline-block; /* Allows text-align: center on parent to work */
+  padding: 12px 30px;
+  background-color: #0d0d0d;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  
+}
+
+.about-minimal-1 .btn-primary:hover {
+  background-color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .about-minimal-1 h2 {
+    font-size: 2em;
+  }
+  .about-minimal-1 .image-wrapper {
+    margin-bottom: 30px;
+  }
+  .about-minimal-1 .content-wrapper p {
+    font-size: 1em;
+  }
+}
+
+/* --- Menu Section --- */
+#menu > div {
+    text-align: center;
+}
+
+#menu > div > div { /* Grid for menu items */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Responsive grid */
+    gap: 50px;
+    margin-bottom: 60px;
+}
+
+#menu > div > div > div { /* Individual menu item card */
+    background-color: var(--card-bg); /* Use variable for card background */
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px var(--shadow-medium); /* Use variable for shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+}
+
+#menu > div > div > div:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px var(--shadow-deep);
+}
+
+#menu img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover; /* Crop image to fit */
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+#menu h3 {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+#menu p {
+    font-size: 17px;
+    margin-bottom: 15px;
+    color: var(--text-muted);
+}
+
+#menu span {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 15px;
+    display: flex; /* To align icon and text horizontally */
+    align-items: center; /* Center icon and text vertically */
+    gap: 5px; /* Space between icon and number */
+}
+
+#menu span i {
+    color: var(--currency-icon-color); /* Color for the currency icon */
+    font-size: 24px; /* Slightly smaller than text for visual balance */
+    transition: color 0.4s ease;
+}
+
+#menu button {
+    background-color: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--bg-primary);
+    padding: 16px 45px;
+    font-size: 19px;
+    border-radius: 50px;
+}
+
+#menu button:hover {
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+}
+
+/* --- Gallery Section --- */
+#gallery > div > div { /* Grid for gallery images */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+#gallery img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow-medium);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#gallery img:hover {
+    transform: scale(1.03); /* Slightly zoom in on hover */
+    box-shadow: 0 8px 25px var(--shadow-deep);
+}
+
+/* --- Events Section --- */
+#events > div > div { /* Grid for event cards */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 50px;
+}
+
+#events > div > div > div { /* Individual event card */
+    background-color: var(--card-bg);
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px var(--shadow-medium);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+}
+
+#events > div > div > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow-deep);
+}
+
+#events img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+#events h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+#events p {
+    font-size: 17px;
+    margin-bottom: 25px;
+    color: var(--text-muted);
+}
+
+#events button {
+    background-color: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--bg-primary);
+    padding: 14px 35px;
+    font-size: 17px;
+    border-radius: 50px;
+}
+
+#events button:hover {
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+}
+
+/* --- Chefs Section --- */
+#chefs > div > div { /* Grid for chef profiles */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 50px;
+    text-align: center;
+}
+
+#chefs > div > div > div { /* Individual chef profile card */
+    background-color: var(--card-bg);
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px var(--shadow-medium);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+}
+
+#chefs > div > div > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow-deep);
+}
+
+#chefs img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%; /* Circular image */
+    border: 3px solid var(--border-color); /* Light, subtle border */
+    margin: 0 auto 25px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+#chefs h3 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+#chefs p {
+    font-size: 17px;
+    color: var(--text-muted);
+}
+
+/* --- Testimonials Section --- */
+#testimonials > div > div { /* Grid for testimonials */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 50px;
+}
+
+#testimonials > div > div > div { /* Individual testimonial card */
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px var(--shadow-medium);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+}
+
+#testimonials > div > div > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow-deep);
+}
+
+#testimonials img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%; /* Circular image */
+    border: 3px solid var(--border-color); /* Subtle border */
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+#testimonials p {
+    font-style: italic; /* Italic text for quotes */
+    font-size: 19px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* --- Contact Section --- */
+#contact > div {
+    display: flex;
+    flex-direction: column; /* Stack vertically on small screens */
+    gap: 60px;
+}
+
+#contact > div > div { /* Contact info and form containers */
+    background-color: var(--card-bg);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px var(--shadow-medium);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+#contact h3 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+#contact p {
+    margin-bottom: 15px;
+    font-size: 19px;
+    color: var(--text-paragraph);
+}
+
+#contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+#contact label {
+    font-size: 19px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: block; /* Ensures label takes full width */
+    font-weight: 500;
+}
+
+#contact input[type="text"],
+#contact input[type="email"],
+#contact textarea {
+    width: 100%;
+    padding: 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 18px;
+    color: var(--text-secondary);
+    background-color: var(--bg-primary); /* Input background matching main bg */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+    outline: none; /* Remove default outline */
+    border-color: var(--text-muted); /* Highlight border on focus */
+    box-shadow: 0 0 0 3px var(--shadow-light); /* Subtle glow on focus */
+}
+
+#contact textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    min-height: 150px;
+}
+
+#contact button {
+    background-color: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--bg-primary);
+    padding: 18px 40px;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+#contact button:hover {
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+}
+
+/* Form validation error styling */
+#contact input.error,
+#contact textarea.error {
+    border-color: #e74c3c; /* Red border for errors */
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--footer-bg); /* Use variables for footer background */
     color: var(--footer-text);
-    padding: 40px 0;
+    padding: 50px 0;
     text-align: center;
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
+footer a {
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: var(--footer-text);
+    margin-bottom: 10px;
+    display: block;
+    transition: color 0.3s ease;
 }
 
-.footer-brand {
-    font-size: 32px;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 10px;
+footer a:hover {
+    color: var(--footer-muted);
 }
 
 footer p {
-    color: var(--footer-text);
+    color: var(--footer-muted);
     font-size: 16px;
-    margin-bottom: 0;
-}
-
-.copyright {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
     margin-top: 15px;
 }
 
-/* Responsive Design (أجزاء من التصميم المتجاوب يمكن أن تؤثر على النافبار) */
-@media (max-width: 992px) {
-    .nav-links {
-        flex-basis: 100%; /* الروابط تأخذ سطرًا كاملاً */
-        margin-top: 15px;
-        justify-content: space-around; /* توزيع الروابط بالتساوي */
+/* --- Responsive Adjustments --- */
+@media (min-width: 901px) { /* Desktop styles for navbar and sections (screens wider than 900px) */
+    #about > div {
+        flex-direction: row; /* Layout items horizontally */
+        text-align: left;
+        align-items: flex-start; /* Align items to the top */
     }
 
-    .nav-content {
-        flex-direction: column;
-        gap: 15px;
+    #about img {
+        width: 45%; /* Image takes 45% width */
+        margin-right: 5%; /* Space for text on the right */
+    }
+
+    html[lang='en'] #about img { /* Adjust margin for LTR (English) */
+        margin-right: 0;
+        margin-left: 5%; /* Image on the right for LTR */
+    }
+
+    #about > div > div { /* Text content takes remaining width */
+        width: 50%;
+    }
+
+    #contact > div {
+        flex-direction: row; /* Layout contact info and form horizontally */
+    }
+
+    html[lang='en'] #contact > div { /* Adjust for LTR (English) */
+        flex-direction: row-reverse; /* Swap order to keep contact info on left */
+    }
+
+    #contact > div > div {
+        width: 50%;
     }
 }
 
-@media (max-width: 480px) {
-    .nav-links {
-        flex-direction: column; /* الروابط عمودية */
+@media (max-width: 900px) { /* Tablet and smaller screens (max width 900px) */
+    /* Navigation adjustments */
+    nav .nav-content {
+        flex-direction: column; /* Stack navbar content vertically */
         align-items: center;
-        gap: 10px;
+        gap: 20px;
     }
 
-    .nav-controls {
+    nav .nav-controls {
         width: 100%;
-        justify-content: center;
-        margin-top: 15px;
+        justify-content: center; /* Center language and theme toggles */
+        margin-bottom: 10px;
     }
-    .lang-switcher {
-        flex-grow: 1; /* للسماح لها بأخذ مساحة أكبر وتوسيط الأزرار */
-        text-align: center;
+
+    nav .nav-links {
+        width: 100%;
+        justify-content: center; /* Center navigation links */
+        gap: 15px;
+        margin-top: 0; /* Remove top margin when stacked */
+    }
+
+    nav .nav-links a {
+        font-size: 16px;
+    }
+
+    /* General section adjustments */
+    h1 {
+        font-size: 56px;
+    }
+    h2 {
+        font-size: 42px;
+        margin-bottom: 50px;
+    }
+    h3 {
+        font-size: 30px;
+    }
+    .hero-bg p {
+        font-size: 20px;
+    }
+    .hero-bg .btn-primary, .hero-bg .btn-secondary {
+        padding: 14px 30px;
+        font-size: 17px;
+    }
+    section {
+        padding: 70px 0; /* Reduce section padding */
+    }
+    #about > div, #contact > div {
+        gap: 40px;
+    }
+    #menu > div > div, #events > div > div, #chefs > div > div, #testimonials > div > div {
+        gap: 30px;
+    }
+    #gallery img {
+        height: 220px; /* Adjust gallery image height */
+    }
+}
+
+@media (max-width: 600px) { /* Smaller tablets and large phones (max width 600px) */
+    h1 {
+        font-size: 48px;
+    }
+    h2 {
+        font-size: 36px;
+    }
+    h3 {
+        font-size: 26px;
+    }
+    p {
+        font-size: 17px;
+    }
+    nav .nav-links {
+        gap: 10px;
+    }
+    nav .nav-links a {
+        font-size: 15px;
+    }
+    /* Stack grids into single column */
+    #menu > div > div, #events > div > div, #chefs > div > div, #testimonials > div > div, #gallery > div > div {
+        grid-template-columns: 1fr;
+    }
+    #about img {
+        max-width: 100%;
+        margin-right: 0;
+        margin-left: 0; /* Reset margins for mobile */
+    }
+    #about > div > div {
+        width: 100%;
+    }
+    #contact > div > div {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) { /* Very small phones (max width 480px) */
+    h1 {
+        font-size: 38px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    .hero-bg p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+    .hero-bg .btn-primary, .hero-bg .btn-secondary {
+        display: block; /* Make buttons block level */
+        margin: 10px auto; /* Center buttons */
+        width: 80%; /* Make buttons take 80% width */
+    }
+    nav .nav-links {
+        flex-direction: column; /* Stack nav links vertically */
+        gap: 8px;
+    }
+    nav .nav-links a {
+        font-size: 14px;
+        padding: 3px 0;
+    }
+    section {
+        padding: 40px 0; /* Further reduce section padding */
+    }
+    #contact form {
+        gap: 15px;
+    }
+    #contact input, #contact textarea {
+        padding: 15px;
+        font-size: 16px;
+    }
+    #contact button {
+        padding: 15px 30px;
+        font-size: 18px;
+    }
+    footer {
+        padding: 30px 0;
+    }
+    footer a {
+        font-size: 28px;
     }
 }

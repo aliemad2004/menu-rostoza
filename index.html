@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rostoza - Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* أنماط أساسية */
+        :root {
+            --primary-color: #555;
+            --secondary-color: #777;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+        
+        [data-theme="dark"] {
+            --primary-color: #ccc;
+            --secondary-color: #999;
+            --bg-color: #222;
+            --card-bg: #333;
+            --text-color: #eee;
+            --border-color: #444;
+        }
+        
+        body {
+            font-family: 'Tajawal', 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* أنماط القائمة */
+        .menu-sections {
+            padding: 3rem 0;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+        
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .menu-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: none;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+        }
+        
+        .menu-item.show {
+            display: flex;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .menu-item h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            padding: 0.8rem 0.8rem 0;
+            margin: 0;
+        }
+        
+        .menu-item p {
+            padding: 0 0.8rem;
+            line-height: 1.5;
+            color: var(--secondary-color);
+            flex-grow: 1;
+            font-size: 0.9rem;
+        }
+        
+        .menu-item .price {
+            display: block;
+            padding: 0.8rem;
+            font-size: 1.2rem;
+            color: var(--bg-color);
+            background-color: var(--primary-color);
+            text-align: left;
+            margin-top: auto;
+        }
+        
+       
+        /* أنماط الهيدر */
+        .page-header {
+            position: relative;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .page-header .container {
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            font-size: 1rem;
+        }
+        
+        /* أنماط الفوتر */
+        footer {
+            background-color: var(--card-bg);
+            padding: 1.5rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+        
+        .footer-brand {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        
+        .copyright {
+            color: var(--secondary-color);
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+        }
+        
+        /* تبديل اللغة */
+        .lang-switcher {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            cursor: pointer;
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+        }
+        
+        .lang-btn.active-lang {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+        
+        /* تبديل الثيم */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.3rem;
+        }
+        
+        /* التجاوبية */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links {
+                margin: 0.5rem 0;
+            }
+            
+            .page-header {
+                height: 250px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .menu-items-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+            
+            .menu-item img {
+                height: 180px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .menu-items-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header {
+                height: 200px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .page-header p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+      <div class="container navbar-content">
+        <a href="#home" class="nav-brand">Rostoza</a>
+
+        <button class="nav-toggler" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="nav-overlay">
+          <button class="nav-overlay-close" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+          </button>
+
+          <div class="nav-links">
+            <a href="file:///C:/Users/alfares/Desktop/neblix-re-ca/pizza%20frono/index.html" data-en="Home" data-ar="الرئيسية">الرئيسية</a>
+            <a href="file:///C:/Users/alfares/Desktop/neblix-re-ca/pizza%20frono/index.html#about" data-en="About" data-ar="عنا">عنا</a>
+            <a href="file:///C:/Users/alfares/Desktop/neblix-re-ca/pizza%20frono/index.html#menu" data-en="Menu" data-ar="القائمة">القائمة</a>
+            <a href="file:///C:/Users/alfares/Desktop/neblix-re-ca/pizza%20frono/index.html#gallery" data-en="Gallery" data-ar="المعرض">المعرض</a>
+            <a href="file:///C:/Users/alfares/Desktop/neblix-re-ca/pizza%20frono/index.html#events" data-en="Events" data-ar="الفعاليات">الفعاليات</a>
+            <a href="file:///C:/Users/alfares/Desktop/neblix-re-ca/pizza%20frono/index.html#chefs" data-en="Chefs" data-ar="طُهاتنا">طُهاتنا</a>
+            <a href="file:///C:/Users/alfares/Desktop/neblix-re-ca/pizza%20frono/index.html#testimonials" data-en="Testimonials" data-ar="الشهادات">الشهادات</a>
+            <a href="file:///C:/Users/alfares/Desktop/neblix-re-ca/pizza%20frono/index.html#contact" data-en="Contact" data-ar="تواصل معنا">تواصل معنا</a>
+          </div>
+          <div class="nav-controls">
+            <div class="lang-switcher">
+              <button class="lang-btn active-lang" data-lang="ar">AR</button>
+              <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+            <button id="theme-toggle" class="theme-toggle">
+              <i class="fas fa-sun icon-light"></i> <i class="fas fa-moon icon-dark"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+    <header class="page-header" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+    </header>
+
+    <section id="full-menu" class="menu-sections">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all" data-en="All" data-ar="الكل">الكل</button>
+                <button class="filter-btn" data-filter="appetizers" data-en="Appetizers" data-ar="المقبلات">المقبلات</button>
+                <button class="filter-btn" data-filter="mains" data-en="Main Courses" data-ar="الأطباق الرئيسية">الأطباق الرئيسية</button>
+                <button class="filter-btn" data-filter="desserts" data-en="Desserts" data-ar="الحلويات">الحلويات</button>
+                <button class="filter-btn" data-filter="drinks" data-en="Drinks" data-ar="المشروبات">المشروبات</button>
+            </div>
+            
+            <div class="menu-items-grid">
+                <!-- مقبلات -->
+                <div class="menu-item show" data-category="appetizers">
+                    <img src="homos.jpg" alt="Hummus">
+                    <h3 data-en="Hummus" data-ar="حمص">حمص</h3>
+                    <p data-en="Creamy chickpea dip with olive oil and paprika" data-ar="حمص كريمي مع زيت الزيتون والفلفل الحلو">
+                        حمص كريمي مع زيت الزيتون والفلفل الحلو
+                    </p>
+                    <span class="price"><i class="fas fa-sack-dollar"></i> 25</span>
+                </div>
+                
+                <div class="menu-item show" data-category="appetizers">
+                    <img src="potato.jpg" alt="Truffle Fries">
+                    <h3 data-en="Truffle Fries" data-ar="بطاطس بالكمأة">بطاطس بالكمأة</h3>
+                    <p data-en="Crispy fries tossed in truffle oil and parmesan" data-ar="بطاطس مقرمشة مغطاة بزيت الكمأة وجبن البارميزان">
+                        بطاطس مقرمشة مغطاة بزيت الكمأة وجبن البارميزان
+                    </p>
+                    <span class="price"><i class="fas fa-sack-dollar"></i> 35</span>
+                </div>
+                
+                <!-- أطباق رئيسية -->
+                <div class="menu-item show" data-category="mains">
+                    <img src="mansaf.jpg" alt="Mansaf">
+                    <h3 data-en="Mansaf" data-ar="منسف">منسف</h3>
+                    <p data-en="Traditional Jordanian dish with lamb" data-ar="طبق أردني تقليدي مع لحم الضأن">
+                        طبق أردني تقليدي مع لحم الضأن
+                    </p>
+                    <span class="price"><i class="fas fa-sack-dollar"></i> 85</span>
+                </div>
+                
+                <div class="menu-item show" data-category="mains">
+                    <img src="meat1.jpg" alt="Grilled Steak">
+                    <h3 data-en="Grilled Steak" data-ar="شريحة لحم مشوية">شريحة لحم مشوية</h3>
+                    <p data-en="Premium cut with seasonal vegetables" data-ar="قطعة لحم فاخرة مع خضروات موسمية">
+                        قطعة لحم فاخرة مع خضروات موسمية
+                    </p>
+                    <span class="price"><i class="fas fa-sack-dollar"></i> 150</span>
+                </div>
+                
+                <!-- حلويات -->
+                <div class="menu-item show" data-category="desserts">
+                    <img src="Knafeh Recipe.jpg" alt="Kunafa">
+                    <h3 data-en="Kunafa" data-ar="كنافة">كنافة</h3>
+                    <p data-en="Traditional Arabic dessert with cheese" data-ar="حلوى عربية تقليدية بالجبن">
+                        حلوى عربية تقليدية بالجبن
+                    </p>
+                    <span class="price"><i class="fas fa-sack-dollar"></i> 45</span>
+                </div>
+                
+                <div class="menu-item show" data-category="desserts">
+                    <img src="🍮🍷 A Taste of Italian Elegance 🇮🇹🌆.jpg" alt="Tiramisu">
+                    <h3 data-en="Tiramisu" data-ar="تيراميسو">تيراميسو</h3>
+                    <p data-en="Classic Italian dessert with coffee flavor" data-ar="حلوى إيطالية بنكهة القهوة">
+                        حلوى إيطالية بنكهة القهوة
+                    </p>
+                    <span class="price"><i class="fas fa-sack-dollar"></i> 50</span>
+                </div>
+                
+                <!-- مشروبات -->
+                <div class="menu-item show" data-category="drinks">
+                    <img src="Orange Agua Fresca (Agua de Naranja) - Elise Tries To Cook.jpg" alt="Fresh Orange Juice">
+                    <h3 data-en="Fresh Orange Juice" data-ar="عصير برتقال طازج">عصير برتقال طازج</h3>
+                    <p data-en="Freshly squeezed orange juice" data-ar="عصير برتقال طبيعي طازج">
+                        عصير برتقال طبيعي طازج
+                    </p>
+                    <span class="price"><i class="fas fa-sack-dollar"></i> 25</span>
+                </div>
+                
+                <div class="menu-item show" data-category="drinks">
+                    <img src="download (2).jpg" alt="Espresso">
+                    <h3 data-en="Espresso" data-ar="إسبريسو">إسبريسو</h3>
+                    <p data-en="A concentrated shot of rich coffee" data-ar="جرعة مركزة من القهوة الغنية">
+                        جرعة مركزة من القهوة الغنية
+                    </p>
+                    <span class="price"><i class="fas fa-sack-dollar"></i> 20</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <a href="index.html" class="footer-brand">Rostoza</a>
+            <p data-en="Fine Dining Experience" data-ar="تجربة طعام فاخرة">
+                تجربة طعام فاخرة
+            </p>
+            <p class="copyright" data-en="&copy; 2024 All rights reserved" data-ar="&copy; 2024 جميع الحقوق محفوظة">
+                &copy; 2024 جميع الحقوق محفوظة
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // فلترة القائمة
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    menuItems.forEach(item => {
+                        if (filterValue === 'all') {
+                            item.classList.add('show');
+                        } else {
+                            if (item.getAttribute('data-category') === filterValue) {
+                                item.classList.add('show');
+                            } else {
+                                item.classList.remove('show');
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // تبديل الثيم
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                
+                // حفظ التفضيل في localStorage
+                localStorage.setItem('theme', newTheme);
+            });
+            
+            // تحميل الثيم المحفوظ
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            // تبديل اللغة
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const elementsToTranslate = document.querySelectorAll('[data-en], [data-ar]');
+            
+            function applyLanguage(lang) {
+                // تغيير اتجاه الصفحة
+                document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+                document.documentElement.setAttribute('lang', lang);
+                
+                // ترجمة المحتوى
+                elementsToTranslate.forEach(element => {
+                    if (element.hasAttribute(`data-${lang}`)) {
+                        const translation = element.getAttribute(`data-${lang}`);
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = translation;
+                        } else {
+                            element.textContent = translation;
+                        }
+                    }
+                });
+                
+                // تحديث الأزرار النشطة
+                langButtons.forEach(btn => {
+                    btn.classList.remove('active-lang');
+                    if (btn.getAttribute('data-lang') === lang) {
+                        btn.classList.add('active-lang');
+                    }
+                });
+                
+                // حفظ التفضيل
+                localStorage.setItem('language', lang);
+            }
+            
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const lang = button.getAttribute('data-lang');
+                    applyLanguage(lang);
+                });
+            });
+            
+            // تحميل اللغة المحفوظة
+            const savedLang = localStorage.getItem('language') || 'ar';
+            applyLanguage(savedLang);
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

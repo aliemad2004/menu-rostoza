@@ -1,0 +1,326 @@
+/* Variables for Theme Switching */
+:root {
+    --primary-color: #A34A2A; /* Burnt Orange/Terracotta */
+    --secondary-color: #C7B09F; /* Light Taupe/Beige */
+    --accent-color: #6A050A; /* Deep Red/Burgundy for accents */
+
+    /* Light Theme Colors */
+    --bg-primary: #F8F4E3; /* Off-White for main background */
+    --bg-secondary: #EFEAE0; /* Slightly darker off-white for sections */
+    --text-primary: #333333; /* Dark Grey for main text */
+    --text-secondary: #555555; /* Medium Grey for secondary text */
+    --text-muted: #777777; /* Lighter Grey for subtle text */
+    --card-bg: #FFFFFF; /* White for card backgrounds */
+    --border-color: #DDDDDD; /* Light grey for borders */
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --shadow-deep: rgba(0, 0, 0, 0.2);
+    --nav-bg: rgba(255, 255, 255, 0.95); /* Slightly transparent white for nav */
+    --footer-bg: #222222; /* Dark grey for footer */
+    --footer-text: #F8F4E3; /* Off-white for footer text */
+    --currency-icon-color: var(--primary-color); /* Color for currency icon */
+    --icon-light-display: block;
+    --icon-dark-display: none;
+}
+
+/* Dark Theme Colors */
+html[data-theme='dark'] {
+    --primary-color: #CD8A5A; /* Lighter Burnt Orange for dark mode */
+    --secondary-color: #8C7B70; /* Darker Taupe */
+    --accent-color: #E24F53; /* Brighter Red for accents */
+
+    --bg-primary: #1C1C1C; /* Dark Grey for main background */
+    --bg-secondary: #2C2C2C; /* Slightly lighter dark grey for sections */
+    --text-primary: #F8F4E3; /* Off-White for main text */
+    --text-secondary: #D4D4D4; /* Lighter grey for secondary text */
+    --text-muted: #B8B8B8; /* Even lighter grey for subtle text */
+    --card-bg: #333333; /* Darker grey for card backgrounds */
+    --border-color: #444444; /* Darker grey for borders */
+    --shadow-light: rgba(255, 255, 255, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.3); /* Darker shadows for contrast */
+    --shadow-deep: rgba(0, 0, 0, 0.5);
+    --nav-bg: rgba(44, 44, 44, 0.95); /* Slightly transparent dark grey for nav */
+    --footer-bg: #0C0C0C; /* Even darker for footer */
+    --footer-text: #D4D4D4; /* Lighter text for footer */
+    --currency-icon-color: var(--primary-color);
+    --icon-light-display: none;
+    --icon-dark-display: block;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* يمكن تغيير الخط هنا لخط عربي أجمل */
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+ul {
+    list-style: none;
+}
+
+h1, h2, h3, h4 {
+    color: var(--text-primary);
+    margin-bottom: 20px;
+}
+
+p {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Removes extra space below images */
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-bg {
+    background-color: var(--bg-secondary);
+    transition: background-color 0.4s ease;
+}
+
+.mt-5 {
+    margin-top: 40px; /* Adjust as needed */
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 12px 25px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Navigation Bar */
+nav {
+    background-color: var(--nav-bg);
+    padding: 20px 0;
+    position: sticky; /* جعل شريط التنقل ملتصقاً بالواجهة */
+    top: 0; /* يلتصق بالأعلى */
+    z-index: 1000; /* لضمان ظهوره فوق المحتوى الآخر */
+    box-shadow: 0 2px 10px var(--shadow-light);
+    backdrop-filter: blur(5px); /* تأثير ضبابي للخلفية */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* للسماح للعناصر بالنزول لسطر جديد على الشاشات الصغيرة */
+}
+
+.nav-brand {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    flex-grow: 1; /* للسماح للروابط بأخذ مساحة أكبر */
+    justify-content: center; /* توسيط الروابط */
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    font-weight: bold;
+    padding: 5px 0;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.lang-switcher .lang-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.lang-switcher .lang-btn:hover {
+    color: var(--primary-color);
+}
+
+.lang-switcher .lang-btn.active-lang {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-primary); /* لون الأيقونة بناءً على الثيم */
+    transition: color 0.3s ease;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.theme-toggle .icon-light {
+    display: var(--icon-light-display);
+}
+
+.theme-toggle .icon-dark {
+    display: var(--icon-dark-display);
+}
+
+/* Footer */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 40px 0;
+    text-align: center;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-brand {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+footer p {
+    color: var(--footer-text);
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.copyright {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 15px;
+}
+
+/* Responsive Design (أجزاء من التصميم المتجاوب يمكن أن تؤثر على النافبار) */
+@media (max-width: 992px) {
+    .nav-links {
+        flex-basis: 100%; /* الروابط تأخذ سطرًا كاملاً */
+        margin-top: 15px;
+        justify-content: space-around; /* توزيع الروابط بالتساوي */
+    }
+
+    .nav-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        flex-direction: column; /* الروابط عمودية */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-controls {
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+    }
+    .lang-switcher {
+        flex-grow: 1; /* للسماح لها بأخذ مساحة أكبر وتوسيط الأزرار */
+        text-align: center;
+    }
+}
